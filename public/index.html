@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore Admin - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>TechStore</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="clientes">
+                    <i class="fas fa-users"></i>
+                    <span>Clientes</span>
+                </a>
+                <a href="#" class="nav-item" data-section="productos">
+                    <i class="fas fa-box"></i>
+                    <span>Productos</span>
+                </a>
+                <a href="#" class="nav-item" data-section="pedidos">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Pedidos</span>
+                </a>
+                <a href="#" class="nav-item" data-section="proveedores">
+                    <i class="fas fa-truck"></i>
+                    <span>Proveedores</span>
+                </a>
+                <a href="#" class="nav-item" data-section="analytics">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Admin</span>
+                </div>
+                <button class="btn-refresh" onclick="cargarTodosLosDatos()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="header-actions">
+                    <span class="badge" id="fecha-actual"></span>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Clientes</h3>
+                            <p id="stat-clientes">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Productos</h3>
+                            <p id="stat-productos">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Pedidos</h3>
+                            <p id="stat-pedidos">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Proveedores</h3>
+                            <p id="stat-proveedores">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Productos por Categoría</h3>
+                        <canvas id="categoriasChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Pedidos por Estado</h3>
+                        <canvas id="pedidosChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="recent-grid">
+                    <div class="recent-card">
+                        <h3>Últimos Clientes</h3>
+                        <div id="recent-clientes" class="recent-list"></div>
+                    </div>
+                    <div class="recent-card">
+                        <h3>Últimos Pedidos</h3>
+                        <div id="recent-pedidos" class="recent-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clientes Section -->
+            <section id="clientes-section" class="content-section">
+                <div class="section-header">
+                    <h2>Gestión de Clientes</h2>
+                    <button class="btn-primary" onclick="mostrarModal('cliente')">
+                        <i class="fas fa-plus"></i> Nuevo Cliente
+                    </button>
+                </div>
+
+                <div class="filters-bar">
+                    <input type="text" id="buscar-cliente" placeholder="Buscar cliente..." class="search-input">
+                    <select id="filtro-ciudad" class="filter-select">
+                        <option value="">Todas las ciudades</option>
+                        <option value="Bogotá">Bogotá</option>
+                        <option value="Cali">Cali</option>
+                        <option value="Medellín">Medellín</option>
+                    </select>
+                    <button class="btn-filter" onclick="filtrarClientes()">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Ciudad</th>
+                                <th>Edad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientes-body">
+                            <!-- Datos dinámicos -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Productos Section -->
+            <section id="productos-section" class="content-section">
+                <div class="section-header">
+                    <h2>Gestión de Productos</h2>
+                    <button class="btn-primary" onclick="mostrarModal('producto')">
+                        <i class="fas fa-plus"></i> Nuevo Producto
+                    </button>
+                </div>
+
+                <div class="filters-bar">
+                    <input type="text" id="buscar-producto" placeholder="Buscar producto..." class="search-input">
+                    <select id="filtro-categoria" class="filter-select">
+                        <option value="">Todas las categorías</option>
+                        <option value="Computadoras">Computadoras</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Monitores">Monitores</option>
+                    </select>
+                    <input type="number" id="precio-max" placeholder="Precio máximo" class="price-input">
+                    <button class="btn-filter" onclick="filtrarProductos()">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                </div>
+
+                <div class="productos-grid" id="productos-grid">
+                    <!-- Tarjetas de productos -->
+                </div>
+            </section>
+
+            <!-- Proveedores Section -->
+            <section id="proveedores-section" class="content-section">
+                <div class="section-header">
+                    <h2>Gestión de Proveedores</h2>
+                    <button class="btn-primary" onclick="mostrarModal('proveedor')">
+                        <i class="fas fa-plus"></i> Nuevo Proveedor
+                    </button>
+                </div>
+
+                <div class="filters-bar">
+                    <input type="text" id="buscar-proveedor" placeholder="Buscar proveedor..." class="search-input">
+                    <button class="btn-filter" onclick="filtrarProveedores()">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                </div>
+
+                <div class="proveedores-grid" id="proveedores-grid">
+                    <!-- Tarjetas de proveedores -->
+                </div>
+            </section>
+
+            <!-- Pedidos Section -->
+            <section id="pedidos-section" class="content-section">
+                <div class="section-header">
+                    <h2>Gestión de Pedidos</h2>
+                    <button class="btn-primary" onclick="mostrarModal('pedido')">
+                        <i class="fas fa-plus"></i> Nuevo Pedido
+                    </button>
+                </div>
+
+                <div class="filters-bar">
+                    <select id="filtro-estado" class="filter-select">
+                        <option value="">Todos los estados</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="pagado">Pagado</option>
+                        <option value="enviado">Enviado</option>
+                        <option value="entregado">Entregado</option>
+                    </select>
+                    <input type="number" id="total-min" placeholder="Total mínimo" class="price-input">
+                    <button class="btn-filter" onclick="filtrarPedidos()">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Productos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pedidos-body">
+                            <!-- Datos dinámicos -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="content-section">
+                <h2>Centro de Análisis</h2>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Clientes > 30 años</h3>
+                        <button class="btn-analytics" onclick="ejecutarConsulta('clientes-mayores')">
+                            <i class="fas fa-play"></i> Ejecutar
+                        </button>
+                        <div id="resultado-clientes-mayores" class="analytics-result"></div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>Clientes Cali/Bogotá</h3>
+                        <button class="btn-analytics" onclick="ejecutarConsulta('clientes-ciudades')">
+                            <i class="fas fa-play"></i> Ejecutar
+                        </button>
+                        <div id="resultado-clientes-ciudades" class="analytics-result"></div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>Productos Accesorios < $50</h3>
+                        <button class="btn-analytics" onclick="ejecutarConsulta('accesorios-baratos')">
+                            <i class="fas fa-play"></i> Ejecutar
+                        </button>
+                        <div id="resultado-accesorios" class="analytics-result"></div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>Pedidos > $500 con Laptop</h3>
+                        <button class="btn-analytics" onclick="ejecutarConsulta('pedidos-reto')">
+                            <i class="fas fa-play"></i> Ejecutar
+                        </button>
+                        <div id="resultado-pedidos-reto" class="analytics-result"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Cliente -->
+    <div id="modal-cliente" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('cliente')">&times;</span>
+            <h3>Nuevo Cliente</h3>
+            <form id="form-cliente" onsubmit="guardarCliente(event)">
+                <input type="text" placeholder="Nombre" id="modal-cliente-nombre" required>
+                <input type="email" placeholder="Email" id="modal-cliente-email" required>
+                <input type="tel" placeholder="Teléfono" id="modal-cliente-telefono">
+                <input type="text" placeholder="Ciudad" id="modal-cliente-ciudad">
+                <input type="number" placeholder="Edad" id="modal-cliente-edad">
+                <button type="submit" class="btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Producto -->
+    <div id="modal-producto" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('producto')">&times;</span>
+            <h3>Nuevo Producto</h3>
+            <form id="form-producto" onsubmit="guardarProducto(event)">
+                <input type="text" placeholder="Nombre" id="modal-producto-nombre" required>
+                <input type="text" placeholder="Descripción" id="modal-producto-descripcion">
+                <input type="number" placeholder="Precio" id="modal-producto-precio" step="0.01" required>
+                <input type="text" placeholder="Categoría" id="modal-producto-categoria">
+                <input type="number" placeholder="Stock" id="modal-producto-stock">
+                <button type="submit" class="btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Proveedor -->
+    <div id="modal-proveedor" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('proveedor')">&times;</span>
+            <h3>Nuevo Proveedor</h3>
+            <form id="form-proveedor" onsubmit="guardarProveedor(event)">
+                <input type="text" placeholder="Nombre de la empresa" id="modal-proveedor-nombre" required>
+                <input type="text" placeholder="Nombre de contacto" id="modal-proveedor-contacto">
+                <input type="email" placeholder="Email" id="modal-proveedor-email">
+                <input type="tel" placeholder="Teléfono" id="modal-proveedor-telefono">
+                <input type="text" placeholder="Dirección" id="modal-proveedor-direccion">
+                <button type="submit" class="btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
