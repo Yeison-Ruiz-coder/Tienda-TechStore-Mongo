@@ -1,0 +1,41 @@
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.analytics-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.analytics-card h3 {
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+.btn-analytics {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+.btn-analytics:hover {
+    background: #3aa8d8;
+}
+
+.analytics-result {
+    max-height: 200px;
+    overflow-y: auto;
+}

@@ -1,0 +1,82 @@
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.producto-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.producto-card h4 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.producto-descripcion {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.producto-precio {
+    font-size: 1.5rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.producto-categoria {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 4px 8px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.85rem;
+}
+
+.producto-stock {
+    margin: 10px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.producto-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* Estilos para botones de acción */
+.btn-icon {
+    background: transparent;
+    border: none;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 0 2px;
+}
+
+.btn-icon:hover {
+    background: #f0f0f0;
+    color: var(--primary);
+}
+
+.btn-icon .fa-trash:hover {
+    color: var(--danger);
+}

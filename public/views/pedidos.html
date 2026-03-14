@@ -1,0 +1,37 @@
+<div class="section-header">
+    <h2>Gestión de Pedidos</h2>
+    <button class="btn-primary" onclick="mostrarModal('pedido')">
+        <i class="fas fa-plus"></i> Nuevo Pedido
+    </button>
+</div>
+
+<div class="filters-bar">
+    <select id="filtro-estado" class="filter-select">
+        <option value="">Todos los estados</option>
+        <option value="pendiente">Pendiente</option>
+        <option value="pagado">Pagado</option>
+        <option value="enviado">Enviado</option>
+        <option value="entregado">Entregado</option>
+    </select>
+    <input type="number" id="total-min" placeholder="Total mínimo" class="price-input">
+    <button class="btn-filter" onclick="filtrarPedidos()">
+        <i class="fas fa-filter"></i> Filtrar
+    </button>
+</div>
+
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Productos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="pedidos-body"></tbody>
+    </table>
+</div>

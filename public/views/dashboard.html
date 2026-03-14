@@ -1,0 +1,61 @@
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Clientes</h3>
+            <p id="stat-clientes">0</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="fas fa-box"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Productos</h3>
+            <p id="stat-productos">0</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon orange">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Pedidos</h3>
+            <p id="stat-pedidos">0</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon purple">
+            <i class="fas fa-truck"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Proveedores</h3>
+            <p id="stat-proveedores">0</p>
+        </div>
+    </div>
+</div>
+
+<!-- GRÁFICOS - ESTOS SON LOS ELEMENTOS QUE FALTABAN -->
+<div class="charts-grid">
+    <div class="chart-card">
+        <h3>Productos por Categoría</h3>
+        <canvas id="categoriasChart" style="width:100%; max-height:300px;"></canvas>
+    </div>
+    <div class="chart-card">
+        <h3>Pedidos por Estado</h3>
+        <canvas id="pedidosChart" style="width:100%; max-height:300px;"></canvas>
+    </div>
+</div>
+
+<div class="recent-grid">
+    <div class="recent-card">
+        <h3>Últimos Clientes</h3>
+        <div id="recent-clientes" class="recent-list"></div>
+    </div>
+    <div class="recent-card">
+        <h3>Últimos Pedidos</h3>
+        <div id="recent-pedidos" class="recent-list"></div>
+    </div>
+</div>

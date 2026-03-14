@@ -1,0 +1,12 @@
+<div class="modal-content">
+    <span class="close" onclick="cerrarModal('proveedor')">&times;</span>
+    <h3 id="modal-proveedor-titulo">Nuevo Proveedor</h3>
+    <form id="form-proveedor" onsubmit="guardarProveedor(event)">
+        <input type="text" placeholder="Nombre de la empresa" id="modal-proveedor-nombre" required>
+        <input type="text" placeholder="Nombre de contacto" id="modal-proveedor-contacto">
+        <input type="email" placeholder="Email" id="modal-proveedor-email" required>
+        <input type="tel" placeholder="Teléfono" id="modal-proveedor-telefono">
+        <input type="text" placeholder="Dirección" id="modal-proveedor-direccion">
+        <button type="submit" class="btn-primary">Guardar Proveedor</button>
+    </form>
+</div>

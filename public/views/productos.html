@@ -1,0 +1,22 @@
+<div class="section-header">
+    <h2>Gestión de Productos</h2>
+    <button class="btn-primary" onclick="mostrarModal('producto')">
+        <i class="fas fa-plus"></i> Nuevo Producto
+    </button>
+</div>
+
+<div class="filters-bar">
+    <input type="text" id="buscar-producto" placeholder="Buscar producto..." class="search-input">
+    <select id="filtro-categoria" class="filter-select">
+        <option value="">Todas las categorías</option>
+        <option value="Computadoras">Computadoras</option>
+        <option value="Accesorios">Accesorios</option>
+        <option value="Monitores">Monitores</option>
+    </select>
+    <input type="number" id="precio-max" placeholder="Precio máximo" class="price-input">
+    <button class="btn-filter" onclick="filtrarProductos()">
+        <i class="fas fa-filter"></i> Filtrar
+    </button>
+</div>
+
+<div class="productos-grid" id="productos-grid"></div>

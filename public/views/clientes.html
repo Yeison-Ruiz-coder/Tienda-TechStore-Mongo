@@ -1,0 +1,35 @@
+<div class="section-header">
+    <h2>Gestión de Clientes</h2>
+    <button class="btn-primary" onclick="mostrarModal('cliente')">
+        <i class="fas fa-plus"></i> Nuevo Cliente
+    </button>
+</div>
+
+<div class="filters-bar">
+    <input type="text" id="buscar-cliente" placeholder="Buscar cliente..." class="search-input">
+    <select id="filtro-ciudad" class="filter-select">
+        <option value="">Todas las ciudades</option>
+        <option value="Bogotá">Bogotá</option>
+        <option value="Cali">Cali</option>
+        <option value="Medellín">Medellín</option>
+    </select>
+    <button class="btn-filter" onclick="filtrarClientes()">
+        <i class="fas fa-filter"></i> Filtrar
+    </button>
+</div>
+
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Edad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="clientes-body"></tbody>
+    </table>
+</div>

@@ -1,0 +1,47 @@
+<div class="modal-content modal-lg">
+    <span class="close" onclick="cerrarModal('pedido')">&times;</span>
+    <h3 id="modal-pedido-titulo">Nuevo Pedido</h3>
+    <form id="form-pedido" onsubmit="guardarPedido(event)">
+        <div class="form-group">
+            <label>Cliente:</label>
+            <select id="modal-pedido-cliente" required>
+                <option value="">Cargando clientes...</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Estado:</label>
+            <select id="modal-pedido-estado">
+                <option value="pendiente">Pendiente</option>
+                <option value="pagado">Pagado</option>
+                <option value="enviado">Enviado</option>
+                <option value="entregado">Entregado</option>
+                <option value="cancelado">Cancelado</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Método de Pago:</label>
+            <select id="modal-pedido-metodo-pago">
+                <option value="efectivo">Efectivo</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="transferencia">Transferencia</option>
+                <option value="otros">Otros</option>
+            </select>
+        </div>
+
+        <h4>Productos del Pedido</h4>
+        <div id="productos-pedido-container"></div>
+        
+        <button type="button" class="btn-secondary" onclick="agregarProductoAlPedido()">
+            <i class="fas fa-plus"></i> Agregar Producto
+        </button>
+
+        <div class="form-group">
+            <label>Total:</label>
+            <input type="number" id="modal-pedido-total" readonly class="total-input" value="0" step="0.01">
+        </div>
+
+        <button type="submit" class="btn-primary">Guardar Pedido</button>
+    </form>
+</div>

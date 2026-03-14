@@ -15,7 +15,10 @@ const ConsultaController = {
     clientesPorCiudad: async (req, res) => {
         try {
             const clientes = await Cliente.find({
-                'direccion.ciudad': { $in: ['Cali', 'Bogotá'] }
+                $or: [
+                    { 'direccion.ciudad': { $in: ['Cali', 'Bogotá'] } },
+                    { ciudad: { $in: ['Cali', 'Bogotá'] } }
+                ]
             });
             res.json(clientes);
         } catch (error) {

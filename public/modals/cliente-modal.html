@@ -1,0 +1,12 @@
+<div class="modal-content">
+    <span class="close" onclick="cerrarModal('cliente')">&times;</span>
+    <h3 id="modal-cliente-titulo">Nuevo Cliente</h3>
+    <form id="form-cliente" onsubmit="guardarCliente(event)">
+        <input type="text" placeholder="Nombre" id="modal-cliente-nombre" required>
+        <input type="email" placeholder="Email" id="modal-cliente-email" required>
+        <input type="tel" placeholder="Teléfono" id="modal-cliente-telefono">
+        <input type="text" placeholder="Ciudad" id="modal-cliente-ciudad">
+        <input type="number" placeholder="Edad" id="modal-cliente-edad">
+        <button type="submit" class="btn-primary">Guardar Cliente</button>
+    </form>
+</div>
